@@ -1,21 +1,29 @@
 # One-Flow Productivity Tracker
 
-One-Flow is a minimalistic, local-first work timer and productivity tracker that lives entirely on your personal machine. Start timing work cycles, measure deficit tasks, and look at beautiful activity heatmaps without needing internet access, servers, or invasive telemetry tracking apps.
+One-Flow is a minimalistic, local-first work timer and productivity tracker that lives entirely on your personal machine. Start timing work cycles, measure deficit tasks, and look at beautiful activity heatmaps without needing internet access or invasive accounts.
 
 ## Features
 - **Project Heatmaps**: Track daily intensities exactly like GitHub tracking squares.
 - **Refillable Timers**: Configure deficit timers to push yourself to hit hourly thresholds over time.
-- **100% Local**: No databases, no telemetry, no tracking scripts. Runs completely securely on your PC via Chrome/Edge/Firefox.
+- **100% Local**: No databases, no telemetry, no tracking scripts. Runs completely securely on your PC via Chrome/Edge/Safari/Firefox.
 
 ## Getting Started
 
+### 🪟 Windows Setup
 1. Download or clone this repository to a secure folder on your PC.
-2. Double-click the **Create_Desktop_Shortcut.bat** script. This auto-generates a clean desktop icon called `One-Flow.lnk` on your Desktop that points securely to your local installation's `index.html`.
-3. Open the desktop shortcut to launch One-Flow!
+2. Double-click **`Create_Desktop_Shortcut.bat`**. This generates a `One-Flow` shortcut on your Desktop with the custom purple icon.
+
+### 🍎 Mac / 🐧 Linux Setup
+1. Download or clone this repository.
+2. Open a terminal in the folder and run: `chmod +x Create_Desktop_Shortcut.sh && ./Create_Desktop_Shortcut.sh`
+3. This creates a `One-Flow.url` shortcut on your Desktop that opens your local installation.
+4. (Optional) For a custom icon on Mac, right-click the shortcut > Get Info, and drag **`assets/icon.png`** onto the icon in the top-left corner.
 
 ## Data and Syncing Notes
-Your data is securely tracked using the `localStorage` API baked directly into HTML5. This means your time blocks strictly stay natively nested inside your active Web Browser configuration limits. 
+Your data is securely tracked using the `localStorage` API baked directly into your browser. 
+- **Security**: Your data never leaves your computer.
+- **Backups**: Since data is stored in your browser's site data, clearing your strict cache might delete it. Use the **Export Data** button in the app periodically to save a JSON backup.
+- **Cross-Device**: To move data between computers, use the Export/Import feature.
 
-If you clear your local browser history/cache strictly across `"Site Data and Cached Images"`, you will effectively wipe your local heatmap configuration! **Export your data via `OneFlow > Projects > Settings` backup periodically**.
-
-*(Note: Data will not cross-sync natively if you install One-Flow locally onto another machine, e.g., your laptop vs. PC without copying over your JSON backup exports.)*
+---
+*Built for spontaneous, focused work blocks.*
