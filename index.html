@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="One-Flow — Personal work timer and productivity tracker. Countdown timers for your projects, pause when you pause, see your patterns.">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>One-Flow</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/timer.css">
+  <link rel="stylesheet" href="css/stats.css">
+</head>
+<body>
+
+  <!-- App Shell -->
+  <div id="app">
+    <!-- Timer View -->
+    <div id="timer-view" class="view active"></div>
+
+    <!-- Projects View -->
+    <div id="projects-view" class="view"></div>
+
+    <!-- Stats View -->
+    <div id="stats-view" class="view"></div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <div class="bottom-nav__inner">
+      <button class="nav-item active" data-view="timer" onclick="navigateTo('timer')" id="nav-timer">
+        <span class="nav-item__icon">⏱</span>
+        <span>Timer</span>
+      </button>
+      <button class="nav-item" data-view="projects" onclick="navigateTo('projects')" id="nav-projects">
+        <span class="nav-item__icon">📋</span>
+        <span>Projects</span>
+      </button>
+      <button class="nav-item" data-view="stats" onclick="navigateTo('stats')" id="nav-stats">
+        <span class="nav-item__icon">📊</span>
+        <span>Stats</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Completion Sound -->
+  <audio id="finish-sound" src="assets/nioce.mp3" preload="auto"></audio>
+
+  <!-- Scripts (order matters — utils & store first) -->
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

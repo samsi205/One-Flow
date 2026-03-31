@@ -1,0 +1,308 @@
+/* ============================================
+   FocusClock — Timer Styles
+   ============================================ */
+
+/* Timer view layout */
+.timer-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--nav-height) - var(--space-12));
+  padding: var(--space-4);
+}
+
+/* ---- Project selector (top of timer) ---- */
+.timer-project-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  margin-bottom: var(--space-8);
+  max-width: 280px;
+}
+
+.timer-project-selector:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-default);
+}
+
+.timer-project-selector__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-circle);
+  flex-shrink: 0;
+}
+
+.timer-project-selector__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  flex: 1;
+  text-align: center;
+}
+
+.timer-project-selector__arrow {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+/* ---- Circular timer ring ---- */
+.timer-ring-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin-bottom: var(--space-8);
+}
+
+.timer-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 6;
+}
+
+.timer-ring-progress {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+  filter: drop-shadow(0 0 8px var(--timer-color, rgba(124, 92, 252, 0.3)));
+}
+
+/* Glow effect when running */
+.timer-ring-container.running .timer-ring-progress {
+  animation: ringGlow 2s ease-in-out infinite;
+}
+
+.timer-ring-container.paused .timer-ring-progress {
+  stroke: var(--warning) !important;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.3));
+}
+
+.timer-ring-container.completed .timer-ring-progress {
+  stroke: var(--success) !important;
+  filter: drop-shadow(0 0 12px rgba(52, 211, 153, 0.4));
+}
+
+/* ---- Center text (time display) ---- */
+.timer-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-display__time {
+  font-family: var(--font-mono);
+  font-size: var(--text-timer);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-timer);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.timer-display__label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-top: var(--space-2);
+}
+
+/* Paused state pulse */
+.timer-ring-container.paused .timer-display__time {
+  animation: pausePulse 1.5s ease-in-out infinite;
+}
+
+/* ---- Timer controls ---- */
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.timer-btn-main {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-circle);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.timer-btn-main.start {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: var(--shadow-glow-accent);
+}
+.timer-btn-main.start:hover {
+  box-shadow: 0 0 40px rgba(124, 92, 252, 0.4);
+  transform: scale(1.05);
+}
+
+.timer-btn-main.pause {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--warning);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  box-shadow: var(--shadow-glow-warning);
+}
+.timer-btn-main.pause:hover {
+  background: rgba(251, 191, 36, 0.25);
+  transform: scale(1.05);
+}
+
+.timer-btn-main:active {
+  transform: scale(0.95);
+}
+
+.timer-btn-reset {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-circle);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  transition: all var(--transition-base);
+}
+
+.timer-btn-reset:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.timer-btn-reset:active {
+  transform: scale(0.92);
+}
+
+/* ---- Session info below controls ---- */
+.timer-session-info {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.timer-session-info__worked {
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+}
+
+/* ---- Completion overlay ---- */
+.timer-complete-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(var(--blur-lg));
+  z-index: 90;
+  animation: fadeIn 500ms ease;
+}
+
+.timer-complete__emoji {
+  font-size: 4rem;
+  animation: celebrate 600ms ease;
+  margin-bottom: var(--space-4);
+}
+
+.timer-complete__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--success);
+  margin-bottom: var(--space-2);
+}
+
+.timer-complete__text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+/* Project dropdown */
+.timer-project-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--space-2);
+  min-width: 240px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-lg);
+  z-index: 60;
+  animation: fadeIn 150ms ease;
+}
+
+.timer-project-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+
+.timer-project-dropdown__item:hover {
+  background: var(--bg-surface-hover);
+}
+
+.timer-project-dropdown__item.active {
+  background: var(--accent-glow);
+}
+
+.timer-project-dropdown__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-circle);
+  flex-shrink: 0;
+}
+
+.timer-project-dropdown__remaining {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selector wrapper for dropdown positioning */
+.timer-project-selector-wrapper {
+  position: relative;
+}
