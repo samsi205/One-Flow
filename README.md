@@ -1,6 +1,6 @@
 # One-Flow Productivity Tracker
 
-One-Flow is a minimalistic, local-first work timer and productivity tracker that lives entirely on your personal machine. Start timing work cycles, measure deficit tasks, and look at beautiful activity heatmaps without needing internet access or invasive accounts.
+One-Flow is made for people who work from home and want to track their work, One-Flow is a a minimalistic, local-first work timer and productivity tracker that lives entirely on your personal machine. Start timing work cycles, measure deficit tasks, and look at beautiful activity heatmaps without needing internet access or invasive accounts. 
 
 ## Features
 - **Project Heatmaps**: Track daily intensities exactly like GitHub tracking squares.
