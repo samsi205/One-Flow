@@ -173,6 +173,38 @@ function openProjectModal(existingProject, onSave) {
   `;
   content.appendChild(typeGroup);
 
+  // Time input (Optional daily block)
+  const timeGroup = document.createElement('div');
+  timeGroup.className = 'form-group';
+  
+  let existingH = '';
+  let existingM = '';
+  if (isEdit && existingProject.targetSeconds > 0) {
+    existingH = Math.floor(existingProject.targetSeconds / 3600);
+    existingM = Math.floor((existingProject.targetSeconds % 3600) / 60);
+  }
+
+  timeGroup.innerHTML = `
+    <label class="form-label" style="display: flex; justify-content: space-between;">
+      <span>Daily Target (Optional)</span>
+      <span style="font-weight: normal; color: var(--text-muted); font-size: var(--text-xs);">Leave empty for open-ended</span>
+    </label>
+    <div class="time-input-row" style="margin-top: var(--space-2);">
+      <div>
+        <input type="number" id="project-hours-input" class="form-input" 
+               min="0" max="999" placeholder="0" value="${existingH}" style="font-size: var(--text-md); padding: var(--space-2);">
+        <div class="time-input-row__label" style="text-align:center; margin-top:4px;">hours</div>
+      </div>
+      <span class="time-input-row__separator" style="font-size: var(--text-lg); padding-bottom: 20px;">:</span>
+      <div>
+        <input type="number" id="project-mins-input" class="form-input" 
+               min="0" max="59" placeholder="00" value="${existingM}" style="font-size: var(--text-md); padding: var(--space-2);">
+        <div class="time-input-row__label" style="text-align:center; margin-top:4px;">minutes</div>
+      </div>
+    </div>
+  `;
+  content.appendChild(timeGroup);
+
   // Color picker
   const colorGroup = document.createElement('div');
   colorGroup.className = 'form-group';
@@ -243,8 +275,11 @@ function openProjectModal(existingProject, onSave) {
   // Save handler
   saveBtn.onclick = () => {
     const name = document.getElementById('project-name-input').value.trim();
-    // Default 0 for targetSeconds at runtime creation
-    const totalSeconds = 0;
+    
+    // Parse optional daily working block
+    const hours = parseInt(document.getElementById('project-hours-input').value) || 0;
+    const mins = parseInt(document.getElementById('project-mins-input').value) || 0;
+    const totalSeconds = (hours * 3600) + (mins * 60);
 
     if (!name) {
       showToast('Please enter a project name', 'warning');
